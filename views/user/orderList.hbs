@@ -1,0 +1,56 @@
+<style>
+    .table {
+
+        border: 5px solid rgb(211, 91, 35);
+    }
+</style>
+
+
+
+
+
+<table class="table table-striped table-bordered mt-5">
+    <thead class="thead-dark">
+        <tr>
+               <th scope="col">Date</th>
+            <th scope="col"> Delivery Address</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Pincode</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Payment method</th>
+            <th scope="col">Status</th>
+            <th scope="col">view-products</th>
+           
+        </tr>
+    </thead>
+
+
+    <tbody>
+
+        {{#each orders}}
+
+        <tr>
+
+            <td>{{this.date}}</td>
+            <td>{{this.deliveryDetails.Address}}</td>
+            <td>{{this.deliveryDetails.Mobile}}</td>
+            <td>{{this.deliveryDetails.Pincode}}</td>
+            <td>{{this.totalAmount}}</td>
+            <td>{{this.PaymentMethod}}</td>
+            <td>{{this.status}}</td>
+            
+
+            <td>
+
+                <a href="/users/view-order-products/{{this._id}}" class="btn btn-primary">view Products</a>
+
+            </td>
+
+
+        </tr>
+
+        {{/each}}
+    </tbody>
+
+
+</table>

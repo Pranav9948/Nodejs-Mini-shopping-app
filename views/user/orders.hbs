@@ -1,0 +1,179 @@
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        text-transform: capitalize;
+    }
+
+
+    #address,
+    #pincode,
+    #mobile {
+
+        width: 40%;
+        height: 50px;
+    }
+
+    .form_body {
+
+        display: flex;
+    }
+
+    body {
+
+        position: relative;
+    }
+
+    .left_section {
+
+        margin-left: 50px;
+        margin-top: 100px;
+    }
+
+    .right_section {
+
+        width: 30%;
+        border: 3px solid black;
+        height: 300px;
+        padding: 20px;
+        position: absolute;
+        right: 130px;
+        top: 340px;
+    }
+</style>
+
+
+
+
+<form id="checkout-form">
+
+
+    <div class="left_section">
+
+        <h1>Enter Delivery Details </h1> <br><br>
+        <label for="address">Address</label> <br><br>
+        <input type="text" name="Address" id="address"><br><br>
+        <label for="pincode">Pincode</label> <br><br>
+        <input type="text" name="Pincode" id="pincode"><br><br>
+        <label for="mobile">Mobile </label> <br><br>
+        <input type="text" name="Mobile" id="mobile"><br><br>
+        <input type="text" name="userId" value="{{user._id}}" hidden>
+
+
+    </div>
+
+
+    <div class="right_section">
+
+        <h4>Total Amount : Rs {{total}}</h4>
+        <hr>
+        <h6>payment method</h6><br>
+        <input type="radio" name="payment-method" value="COD">
+        <label for="cod">COD</label> <br>
+        <input type="radio" name="payment-method" value="online">
+        <label for="online payment">Online Payment</label> <br><br><br>
+        <button type="submit" class="btn btn-primary">checkout</button>
+
+    </div>
+
+</form>
+
+
+<script>
+
+    $("#checkout-form").submit((e) => {
+
+        e.preventDefault()
+
+        $.ajax({
+
+            url: '/users/orders',
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+
+                console.log("successfully : ", response)
+                alert(response)
+
+                if (response.codSuccess) {
+
+                    location.href = '/users/order-success'
+                }
+              
+               else{
+                          razorPayPayment(response)
+               }
+
+            }
+
+
+        })
+
+
+    })
+
+  function razorPayPayment(order){
+
+var options = {
+    "key": "rzp_test_3IP0gghLsKDrU8", // Enter the Key ID generated from the Dashboard
+    "amount": "order.amount", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Pranav",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        
+
+        verifyPayment(response,order)
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+
+
+  };
+
+  var rzp1 = new Razorpay(options);
+    rzp1.open();
+  }
+
+function verifyPayment(payment,order){
+
+$.ajax({
+
+url:'/users/verify-payment',
+data:{
+
+    payment,
+    order
+},
+
+method:'post',
+success:(response)=>{
+    if(response.status){
+        location.href='/users/order-success'
+    }
+    else{
+        alert('payment failed')
+    }
+}
+})
+
+
+}
+
+
+
+
+
+</script>

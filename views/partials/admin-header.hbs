@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-success p-4">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white fs-2" href="/admin">ADMIN</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link active text-white fs-4 ps-5" aria-current="page" href="/admin">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active  text-white fs-4 ps-5" aria-current="page" href="/admin">Products</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active text-white fs-4 ps-5" aria-current="page" href="/admin/admins/ordersList">All Orders</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active text-white fs-4 ps-5" aria-current="page" href="#">All Users</a>
+        </li>
+        </ul>
+
+
+<div class="dropdown">
+  <button class="btn dropdown-toggle bg-dark text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+   
+   {{#if admin}}
+   
+   
+    {{admin.name}}
+
+    {{else}}
+
+    ADMIN Login
+
+    {{/if}}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+    {{#if admin}}
+    <li><a class="dropdown-item bg-primary text-white p-2 me-3" href="/admin/adLogin"> Logout</a></li>
+
+{{else}}
+<li><a class="dropdown-item bg-primary text-white p-2 me-3" href="/admin/adLogin"> Login</a></li>
+
+{{/if}}
+
+  </ul>
+</div>
+
+
+    </div>
+  </div>
+</nav>

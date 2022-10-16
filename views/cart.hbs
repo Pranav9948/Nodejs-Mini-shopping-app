@@ -1,0 +1,89 @@
+<div class="container">
+
+  <table class="table table-striped mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Title</th>
+        <th scope="col" class="text-center">Price</th>
+        <th scope="col" class="">Quantity</th>
+         <th scope="col" class="">remove</th>
+       
+
+      </tr>
+    </thead>
+    <tbody>
+
+
+      {{#each CartProducts}}
+      <tr>
+
+
+        <td><img src="/product-images/{{this.productIds._id}}.jpg" width="70px" height="70px"></td>
+        <td class="align-middle">{{this.productIds.model}} </td>
+          <td class="align-middle">{{this.productIds.op}} </td>
+
+        <td class="align-middle"><button class="cart-item-count mr-3 bg-info text-white fs-5 border-white "
+            onclick="changequantity('{{this._id}}','{{this.productIds._id}}','{{../user._id}}',-1)">-</button>
+          <span id="{{this.productIds._id}}">{{this.quantity}}</span>
+          <button class="cart-item-count ml-3 border-white bg-primary text-white fs-5 "
+            onclick="changequantity('{{this._id}}','{{this.productIds._id}}','{{../user._id}}',1)">+</button>
+        </td>
+        <td class="align-middle"><a href="/users/removeCart/" class="btn btn-danger">Remove</a>
+        </td>
+      </tr>
+
+      {{/each}}
+    </tbody>
+  </table>
+  <hr>
+
+<h3 style="text-align: right; margin-right: 100px;" class="mt-5 ">Total Amount : Rs <span id="total"> {{TotalAmount}}</span></h3>
+
+<div class="d-flex">
+<a href="/users/orders" class="btn btn-success  ms-auto mt-4 btn-lg" style="margin-right: 130px;">Place Order</a>
+</div>
+
+</div>
+
+
+
+<script>
+
+  function changequantity(cardId, proId,userId, count) {
+
+    let quantity = parseInt(document.getElementById(proId).innerHTML)
+    count = parseInt(count)
+
+
+    $.ajax({
+
+      url: '/users/change-product-quantity',
+      data: {
+
+        user:userId,
+        cart: cardId,
+        product: proId,
+        count: count,
+        quantity: quantity
+
+      },
+      method: 'post',
+      success: (response) => {
+
+        if (response.removeProduct) {
+
+          alert("product removed from cart")
+          location.reload()
+
+        }
+        else {
+
+          document.getElementById(proId).innerHTML = quantity + count
+          document.getElementById('total').innerHTML=response.total
+        }
+      }
+    })
+  }
+
+</script>

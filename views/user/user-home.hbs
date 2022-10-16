@@ -1,0 +1,37 @@
+<section>
+    <div class="container mt-5">
+        <div class="row">
+
+            {{#each productz}}
+
+            <div class="col-md-3 p-3">
+                <div class="card  border border-dark p-3 border border-3" style="height: 570px;">
+                    <img src="/product-images/{{this._id}}.jpg" class="card-img-top" alt="phone" width="90%"
+                        style="padding: 8px; height: 200px;">
+                    <div class="card-body">
+                        <h4 class="card-model pt-2">{{this.model}}</h4>
+                        <h6 class="card-title pt-2">{{this.Highlights}}</h6>
+                        <p class="card-text pt-2">{{this.Feautures}}</p>
+                        <div class="d-flex">
+                            <h6 class="offerprice">{{this.op}}</h6> <span>
+                                <h6 class="price ps-2" style="text-decoration: line-through;">{{this.p}}</h6>
+                            </span>
+                            <h6 class="discount ps-2">{{this.dis}}</h6>
+                        </div>
+                        <button onclick="addToCart('{{this._id}}')"  class="btn btn-success mt-3">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+
+
+            {{/each}}
+
+        </div>
+    </div>
+
+
+</section>
+
+
+
+

@@ -1,0 +1,264 @@
+
+
+
+    <style>
+        * {
+            text-transform: capitalize;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #3e678f;
+            color: white;
+        }
+
+        .header_middle {
+            display: flex;
+
+        }
+
+        .main_header {
+            display: flex;
+            align-items: center;
+
+        }
+
+        .header_left {
+            width: 15%;
+            margin-left: 10px;
+
+        }
+
+        .header_right {
+            margin: auto;
+
+        }
+
+        .header_options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .header_options i {
+            color: white;
+        }
+
+        .btn {
+
+            height: 50px;
+            width: 100px;
+            border-radius: 32px;
+            color: #ffff;
+            background: #47d147;
+            border: none;
+        }
+
+        .box {
+            background: #4e657a;
+            width: 80%;
+            height: 1200px;
+            margin: auto;
+            display: flex;
+            margin-top: 2px;
+        }
+
+        section {
+            background-color: #b23333e0;
+            ;
+        }
+
+        .box_left {
+            width: 50%;
+            color: white;
+        }
+
+
+        .box_right {
+            width: 50%;
+            color: white;
+        }
+
+        .box_left input {
+            background-color: #c4ddcca1;
+        }
+
+
+        .inside_box {
+
+            width: 70%;
+            height: 250px;
+            background-color: #72baa5;
+            margin-top: 440px;
+            margin-left: 60px;
+            text-align: center;
+            padding-top: 44px;
+        }
+
+        .inside_box i {
+            margin: 20px;
+        }
+
+        .upload_btn {
+            height: 60px;
+            background: orange;
+            width: 70%;
+            margin-left: 60px;
+            text-align: center;
+            font-size: 24px;
+            padding-top: 7px;
+        }
+
+        .add_product {
+            height: 66px;
+            width: 80%;
+            margin-left: 308px;
+            background: #1adbf5d9;
+            color: white;
+            font-size: 24px;
+            border: none;
+
+        }
+    </style>
+
+
+
+
+
+
+
+    <!-- header starts -->
+    <header>
+
+        <div class="main_header">
+
+            <div class="header_left">
+
+                <h2>Admin</h2>
+
+            </div>
+            <div class="header_middle">
+
+                <div class="header_options">
+                    <span class="material-symbols-outlined">dashboard </span>
+                    <h2>Dashboard</h2>
+                </div>
+                <div class="header_options">
+
+                    <span class="material-symbols-outlined">summarize</span>
+                    <h2>Reports</h2>
+                </div>
+                <div class="header_options">
+
+                    <span class="material-symbols-outlined">production_quantity_limits</span>
+                    <h2>Products</h2>
+                </div>
+                <div class="header_options">
+
+                    <span class="material-symbols-outlined"> manage_accounts </span>
+                    <h2>Accounts</h2>
+                </div>
+
+                <div class="header_options">
+
+                    <span class="material-symbols-outlined"> settings </span>
+                    <h2>Settings</h2>
+                </div>
+
+            </div>
+
+            <div class="header_right">
+
+                <a href="/admin"><button class="btn">logout</button></a>
+
+            </div>
+
+
+        </div>
+    </header>
+
+    <!-- header ends -->
+
+    <!-- section starts -->
+
+
+    <section>
+
+
+        <div>
+
+            <form action="/admin/editProduct/{{response._id}}" method="post" enctype="multipart/form-data" class="box">
+
+                <div class="box_left" style="margin-left: 20px;">
+
+                    <h3 style="text-align: center; padding-top: 20px; padding-bottom: 20px;">Edit product</h3>
+
+
+                    <label for="sl">sl</label><br> <br>
+                    <input type="text" id="sl" name="sl" style="height: 40px;width: 15%;" value="{{response.sl}}"><br> <br><br>
+
+                    <label for="model">model</label><br> <br>
+                    <input type="text" id="model" name="model" value="{{response.model}}"   style="height: 40px;width: 55%;"><br> <br><br>
+
+                    <label for="Highlights">Highlights</label><br> <br>
+                    <input type="text" id="Highlights" name="Highlights" value="{{response.Highlights}}"   style="height: 60px;width: 55%;"><br> <br><br>
+                    <label for="Feautures">Feautures</label><br><br>
+                    <input type="text" id="Feautures" name="Feautures"  value="{{response.Feautures}}"    style="height: 100px;width: 55%;"><br> <br><br>
+                    <label for="phones">Select Category</label><br><br>
+
+
+
+                    <label for="op">offerprice</label><br><br>
+                    <input type="text" id="op" name="op" value="{{response.op}}"  style="height: 40px;width: 20%;"><br><br>
+                    <label for="p">price</label><br><br>
+                    <input type="text" id="p" name="p" value="{{response.p}}"  style="height: 40px;width: 20%;"><br><br>
+                    <label for="dis">discounts</label><br><br>
+                    <input type="text" id="dis" name="dis" value="{{response.dis}}" style="height: 40px;width: 10%;"><br>
+
+
+
+                   <a href="/admin"><button class="add_product">Edit Product</button></a>
+
+
+
+                </div>
+
+                <div class="box_right">
+
+                    <div class="inside_box">
+                        <span class="material-symbols-outlined"
+                            style="font-size: 100px; text-align: center;">file_upload</span>
+                          
+
+                         <img src="/product-images/{{response._id}}.jpg" alt="" style="width: 100px;height: auto;" id="imgview"> 
+                        <input type="file" id="myFile" name="image" onchange="viewImage(event)">
+
+                    </div>
+
+                    <div class="upload_btn">
+                        <label for="upload">upload image</label><br><br>
+
+                    </div>
+                </div>
+
+            </form>
+        </div> 
+
+    </section>
+    <!-- section ends -->
+
+
+
+<script>
+
+function viewImage(event){
+
+    document.getElementById('imgview').src=URL.createObjectURL(event.target.files[0])
+}
+
+
+
+</script>
